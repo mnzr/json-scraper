@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-import urllib2
+#import urllib2
+import requests
 import json
 
 def main():
@@ -17,12 +18,14 @@ def main():
 
     #make graph api url with company username
     current_page = graph_url + current
-        #open public page in facebook graph api
-    web_response = urllib2.urlopen(current_page)    #take response from the url
+    #open public page in facebook graph api
+    #web_response = urllib2.urlopen(current_page)
+    web_response = requests.get(current_page)    #take response from the url
     #print(web_response)
-    readable_page = web_response.read()             #conversion to human readable format
+    #readable_page = web_response.read()             #conversion to human readable format
     #print(readable_page)
-    json_fbpage = json.loads(readable_page)         #
+    #json_fbpage = json.loads(readable_page)         #
+    json_fbpage = web_response.json()
 
     print current + " page has these properties:"
     for property in json_fbpage:
